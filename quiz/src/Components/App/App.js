@@ -1,4 +1,5 @@
 import './App.css';
+import StartForm from '../StartForm/StartForm';
 
 function App() {
   return (
@@ -6,6 +7,7 @@ function App() {
       <header className="App-header">
 
       </header>
+      <StartForm/>
     </div>
   );
 }

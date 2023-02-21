@@ -1,12 +1,14 @@
 import React from 'react';
-import './QuizForm.css'
+import './StartForm.css'
+import {difficultOptions} from '../../utils/variables';
+import SelectInput from '../SelectInput/SelectInput';
 
-export default function QuizForm() {
+export default function StartForm() {
   return (
-    <form onSubmit={}>
+    <form onSubmit={() => {}}>
       <h2>
         Train your skills
-        <select></select>
+        <SelectInput options={difficultOptions}/>
         {/*  category, difficult, maskedInput count q, start button*/}
         <button type='submit'></button>
       </h2>
