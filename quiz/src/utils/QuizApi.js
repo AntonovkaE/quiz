@@ -2,7 +2,6 @@ class QuizApi {
   constructor(config) {
     this._baseUrl = config.baseUrl;
     this._headers = config.headers;
-    this._api = config.api;
   }
 
   _checkPromise(res) {
@@ -12,10 +11,11 @@ class QuizApi {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getQiuz(difficulty, category, limit) {
-    return fetch(`${this._baseUrl}`, {
-      body: `apiKey=${this._api}&difficulty=${difficulty}&category=${category}}&limit=${limit || 20}`,
-      headers: this._headers,
+  getQuiz(difficulty, category = 'any', limit=20) {
+    const categoryProps = (category !== 'any') ? `category=${category}` : '';
+    const difficultyProps = difficulty ? `&difficulty=${difficulty}` : '';
+    return fetch(`${this._baseUrl}?${categoryProps}${difficultyProps}&limit=${limit}`, {
+      headers: this._headers
     }).then(res => this._checkPromise(res))
   }
 }
@@ -23,9 +23,8 @@ class QuizApi {
 
 const quizApi = new QuizApi({
   baseUrl: 'https://quizapi.io/api/v1/questions',
-  api: '26NmUsrnx150w4r642YzhdXyyTga6o7ufhzXCg13',
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
+    "X-Api-Key": '26NmUsrnx150w4r642YzhdXyyTga6o7ufhzXCg13'
   },
 });
 

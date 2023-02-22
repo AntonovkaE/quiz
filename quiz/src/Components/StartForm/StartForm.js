@@ -17,7 +17,10 @@ export default function StartForm() {
           <h3>Difficulty</h3>
           <SelectInput options={difficultOptions}/>
         </div>
-      <input type='number'/>
+      <div>
+        <h3>How many questions?</h3>
+        <input type='number'/>
+      </div>
         {/*  category, difficult, maskedInput count q, start button*/}
         <button type='submit'>Start</button>
     </form>

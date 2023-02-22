@@ -6,3 +6,5 @@ const categoryOptions = [
 ];
 
 export { difficultOptions, categoryOptions };
+
+
