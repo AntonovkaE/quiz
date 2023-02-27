@@ -3,6 +3,7 @@ import './StartForm.css';
 import { categoryOptions, difficultOptions } from '../../utils/variables';
 import SelectInput from '../SelectInput/SelectInput';
 import quizApi from '../../utils/QuizApi';
+import Question from '../Question/Question';
 
 export default function StartForm() {
   const [isFormHidden, setIsFormHidden] = useState(false);
@@ -20,7 +21,6 @@ export default function StartForm() {
 
   useEffect(() => {
     setIsFormHidden(questions.length ? true : false);
-    console.log(questions);
   }, [questions]);
   return !isFormHidden ?
     (<form onSubmit={handleSubmit}>
@@ -45,11 +45,8 @@ export default function StartForm() {
     </form>) : (<ul>
         {questions.map(q => {
           return (
-            <li key={q.id}><h3>{q.question}</h3>
-              <fieldset className='answers'>
-              {Object.keys(q.answers).map(key => q.answers[key] !== null ? (<label>{q.answers[key]}
-                <input name={q.id} type="radio" value={key}></input></label>) : '')}
-              </fieldset>
+            <li key={q.id}>
+              <Question q={q}/>
             </li>);
         })}
       </ul>
