@@ -11,8 +11,8 @@ class QuizApi {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getQuiz(difficulty, category = 'any', limit=20) {
-    const categoryProps = (category !== 'any') ? `category=${category}` : '';
+  getQuiz(category, difficulty, limit=20) {
+    const categoryProps = (category !== 'any' && category !== '') ? `category=${category}` : '';
     const difficultyProps = difficulty ? `&difficulty=${difficulty}` : '';
     return fetch(`${this._baseUrl}?${categoryProps}${difficultyProps}&limit=${limit}`, {
       headers: this._headers
