@@ -5,25 +5,17 @@ import SelectInput from '../SelectInput/SelectInput';
 import quizApi from '../../utils/QuizApi';
 import Question from '../Question/Question';
 
-export default function StartForm() {
-  const [isFormHidden, setIsFormHidden] = useState(false);
+export default function StartForm({formSubmit}) {
+
   const [category, setCategory] = useState('any');
   const [difficulty, setDifficulty] = useState('');
   const [questionCount, setQuestionCount] = useState('20');
-  const [questions, setQuestions] = useState([]);
   const handleSubmit = (event) => {
     event.preventDefault();
-    quizApi.getQuiz(category, difficulty, questionCount)
-      .then(res => {
-        setQuestions(res);
-      });
+    formSubmit(category, difficulty, questionCount)
   };
 
-  useEffect(() => {
-    setIsFormHidden(questions.length ? true : false);
-  }, [questions]);
-  return !isFormHidden ?
-    (<form onSubmit={handleSubmit}>
+  return (<form onSubmit={handleSubmit}>
       <h2>
         Train your skills
       </h2>
@@ -42,14 +34,6 @@ export default function StartForm() {
         <input type="number"/>
       </div>
       <button type="submit">Start</button>
-    </form>) : (<ul>
-        {questions.map(q => {
-          return (
-            <li key={q.id}>
-              <Question q={q}/>
-            </li>);
-        })}
-      </ul>
-    );
+    </form>);
 }
 
